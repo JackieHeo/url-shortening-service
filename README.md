@@ -18,7 +18,7 @@
     - JUnit5
     
 ## Run
-  - 설정된 값
+  - 현재 설정된 값(application.yml)
     - REDIS 
         - host : 127.0.0.1
         - port : 6379
@@ -33,7 +33,7 @@
     
   - Project 경로에서 gradle bootRun 입력(Linux의 경우 실행에 실패할시 sudo gradle bootRun으로 실행)
   
-  - host(예 http://localhost:8080/) 접속 (요청 값에 따라 등록 화면 또는 리다이렉트 됩니다)
+  - host(예 http://localhost:8080/) 접속 (요청 값에 유무에 따라 등록 화면 또는 리다이렉트 됩니다)
   
 ## DDL
 CREATE TABLE `url_shorten` (
