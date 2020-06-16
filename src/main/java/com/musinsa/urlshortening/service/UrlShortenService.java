@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,10 +46,12 @@ public class UrlShortenService {
     }
 
     public String getUrl(String shortenUrl){
+        //1. 레디스 조회
         String url = urlShortenCacheRepository.getUrl(shortenUrl);
         if(Strings.isNotEmpty(url)){
             return url;
         }
+        //2. 레디스에 정보가 없을 경우 db 조회
         return urlShortenRepository.findById(Base62.decode(shortenUrl))
                 .orElseGet(UrlShortenEntity::new)
                 .getUrl();
@@ -76,7 +77,5 @@ public class UrlShortenService {
         }catch (Exception e){
             log.error("failed to sync count :", e);
         }
-
     }
-
 }
