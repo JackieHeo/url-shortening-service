@@ -36,14 +36,17 @@
   - host(예 http://localhost:8080/) 접속 (요청 값에 유무에 따라 등록 화면 또는 리다이렉트 됩니다)
   
 ## DDL
-CREATE TABLE `url_shorten` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `url` varchar(200) DEFAULT NULL,
-  `shorten_url` char(8) DEFAULT NULL,
-  `count` bigint(20) unsigned DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `udx_url` (`url`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+    common 스키마 생성 후 테이블 생성하시면 됩니다.
+
+    CREATE TABLE `url_shorten` (
+      `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+      `url` varchar(200) DEFAULT NULL,
+      `shorten_url` char(8) DEFAULT NULL,
+      `count` bigint(20) unsigned DEFAULT '0',
+      PRIMARY KEY (`id`),
+      UNIQUE KEY `udx_url` (`url`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ## Test
   - 테스트 코드는 service, repository 단위로 구현했습니다.
