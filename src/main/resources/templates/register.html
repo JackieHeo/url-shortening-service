@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>URL Shortening Service</title>
+</head>
+
+<body>
+    <table>
+        <tbody>
+        <tr>
+            <td colspan="2">URL Shortening Service</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><input id="url" style="width: 750px; margin-right: 25px" type="text" placeholder="Please insert URL (ex: https://en.wikipedia.org/wiki/URL_shortening)"/></td>
+            <td><button id="getShortURLBtn" onclick="_getShortenURL()">단축 URL 생성</button></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>생성된 단축 url</td>
+        </tr>
+        <tr>
+            <td><span id="result" style="font-size: 17px; font-weight: bold"></span></td>
+        </tr>
+        </tbody>
+    </table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function _getShortenURL()  {
+        var data = {};
+        data["url"] = $("#url").val();
+
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(data),
+            url: "/url-shorten",
+            type: "POST",
+            success: function (response) {
+
+                if (response.status === 200) {
+                    $("#result").text(response.result);
+                }else{
+                    alert(response.message);
+                }
+            },
+            error: function (error) {
+                alert(error.responseJSON.errors[0].defaultMessage);
+                console.log(error);
+            }
+        });
+    }
+
+    $("#url").keyup(
+        function (event) {
+            if (event.keyCode === 13) {
+                _getShortenURL();
+            }
+        });
+</script>
+</body>
+</html>
