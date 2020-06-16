@@ -1,5 +1,4 @@
 # url-shortening-service
-url-shortening-service
 
 ## 설명
   - 단축 url 생성
